@@ -16,11 +16,11 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        string name;
         Node* prev;
         Node* next;
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val;
+            name = val;
             prev = p;
             next = n;
         }
@@ -63,12 +63,13 @@ public:
         temp->next = newNode;
     }
 
-    void delete_val(int value) {
+    //unused function
+    /*void delete_val(int value) {
         if (!head) return;
 
         Node* temp = head;
         
-        while (temp && temp->data != value)
+        while (temp && temp->name != value)
             temp = temp->next;
 
         if (!temp) return;
@@ -84,7 +85,7 @@ public:
             tail = temp->prev;
 
         delete temp;
-    }
+    } */
 
     void delete_pos(int pos) {
         if (!head) {
@@ -193,7 +194,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->data << " ";
+            cout << current->name << " ";
             current = current->next;
         }
         cout << endl;
@@ -206,19 +207,40 @@ public:
             return;
         }
         while (current) {
-            cout << current->data << " ";
+            cout << current->name << " ";
             current = current->prev;
         }
         cout << endl;
     }
     void choose_customers(string file){
-        ifstr
+        
         
         if (!head) {
             
         }
     }
     void pick_event(){
+        int rand1, rand2, rand3, rand4, rand5;
+        rand1 = rand() % 100 +1;
+        rand2 = rand() % 100 +1;
+        rand3 = rand() % 100 +1;
+        rand4 = rand() % 100 +1;
+        rand5 = rand() % 100 +1;
+        if (rand1 <= 40) {
+            event_A();
+        }
+        if (rand2 <= 60) {
+            event_B();
+        }
+        if (rand3 <= 20) {
+            event_C();
+        }
+        if (rand4 <= 10) {
+            event_D();
+        }
+        if (rand5 <= 10) {
+            event_E();
+        }
         
     }
     void event_A(){
@@ -240,6 +262,8 @@ public:
 
 int main() {
     srand(time(0));
+    cout << "Store opens: " << endl;
+    
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
     
     
