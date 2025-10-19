@@ -249,7 +249,7 @@ public:
         }
         return current->name;
     }
-    
+    //function pick_event
     void pick_event(DoublyLinkedList &name,DoublyLinkedList &line ){
         int rand1, rand2, rand3, rand4, rand5;
         rand1 = rand() % 100 +1;
@@ -274,21 +274,33 @@ public:
         }
         
     }
+    //function event_A occurs when person at the front of line is served
+    //arguments: linked list line
+    //return: none
     void event_A(DoublyLinkedList &line){
         Node *current = line.head;
         cout << current->name << " was served" << endl;
         line.pop_front();
     }
+    //function event_B occurs when person joins back of line
+    //arguments: linked list line, linked list name
+    //return: none
     void event_B(DoublyLinkedList &name,DoublyLinkedList &line){
         string n = name.get_rand_customer();
         cout << n << " joined the line" << endl;
         line.push_back(n);
     }
+    //function event_A occurs when person at bakc of line leaves
+    //arguments: linked list line
+    //return: none
     void event_C(DoublyLinkedList &line){
         Node *current = line.tail;
         cout << current->name << " (at the rear) left the line" << endl;
         line.pop_back();
     }
+    //function event_A occurs when somebody in the line leaves
+    //arguments: linked list line
+    //return: none
     void event_D(DoublyLinkedList &line){
         int length = line.get_size();
         if (length == 0) {
@@ -304,6 +316,9 @@ public:
         line.delete_pos(val);
         
     }
+    //function event_A occurs when an VIP joins front of the line
+    //arguments: linked list line
+    //return: none
     void event_E(DoublyLinkedList &name,DoublyLinkedList &line){
         string n = name.get_rand_customer();
         cout << n << " (VIP) joins the front of line" << endl;
@@ -313,19 +328,26 @@ public:
 
 int main() {
     srand(time(0));
-    DoublyLinkedList nameList;
-    nameList.gather_customers("names.txt");
+    DoublyLinkedList nameList; //declaring nameList linked list
+    nameList.gather_customers("names.txt"); //calling gather_customer function
+    //makes it so we don't access names file everytime instead another linked list
     DoublyLinkedList lineList;
+    string name;
     cout << "Store opens: " << endl;
     for (int i = 0;  i < MIN_LS; i++) {
-        lineList.push_back(nameList.get_rand_customer());
-        cout << lineList
+        name = nameList.get_rand_customer();
+        lineList.push_back(name);
+        cout << name << " joins the line" << endl;
     }
+
     int step = 2;
     for (int i = 0; i < MAX_LS - 1; i++) {
-        cout << "Time #step" << step << endl;
+        if (lineList.get_size()==0) {
+            cout << "Line is empty" << endl;
+        }
+        cout << "Time step #" << step << endl;
         lineList.pick_event(nameList,lineList);
-        cout << setw(MIN_NR) << "Resulting line" << endl;
+        cout << setw(MIN_NR) << "Resulting line: " << endl;
         lineList.print();
         step++;
     }
