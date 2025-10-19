@@ -197,7 +197,6 @@ public:
             cout << setw(MIN_NR) << current->name << endl;
             current = current->next;
         }
-        cout << endl;
     }
 
     void print_reverse() {
@@ -275,7 +274,9 @@ public:
         
     }
     void event_A(DoublyLinkedList &line){
-        cout << line.
+        Node *current = line.head;
+        cout << current->name << " was served" << endl;
+        line.pop_front();
     }
     void event_B(DoublyLinkedList &name,DoublyLinkedList &line){
         
@@ -302,16 +303,14 @@ int main() {
     }
     lineList.print();
     int step = 2;
-    for (int i = 0; i < MAX_LS - 1; i++) {
+    lineList.event_A(lineList);
+    lineList.print();
+    /*for (int i = 0; i < MAX_LS - 1; i++) {
         cout << "Time #step" << step << endl;
         lineList.pick_event(nameList,lineList);
         cout << setw(MIN_NR) << "Resulting line" << endl;
         lineList.print();
         step++;
-    }
-    
-    
-    
-    
+    }*/
     return 0;
 }
