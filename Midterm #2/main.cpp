@@ -119,7 +119,8 @@ public:
         }
     
         Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
+        Node* tempNext = temp->next;
+        tempPrev->next = tempNext;
         temp->next->prev = tempPrev;
         delete temp;
     }
@@ -290,13 +291,23 @@ public:
     }
     void event_D(DoublyLinkedList &line){
         int length = line.get_size();
-        cout << length << endl;
+        if (length == 0) {
+            cout << "Empty line" << endl;
+            return;
+        }
         int val = rand() % length;
+        Node *current = line.head;
+        for (int i = 0; i < val; i++) {
+            current = current->next;
+        }
+        cout << setw(MIN_NR) << current->name << " has left the line" << endl;
         line.delete_pos(val);
         
     }
     void event_E(DoublyLinkedList &name,DoublyLinkedList &line){
-        
+        string n = name.get_rand_customer();
+        cout << n << " (VIP) joins the front of line" << endl;
+        line.push_front(n);
     }
 };
 
@@ -308,23 +319,15 @@ int main() {
     cout << "Store opens: " << endl;
     for (int i = 0;  i < MIN_LS; i++) {
         lineList.push_back(nameList.get_rand_customer());
+        cout << lineList
     }
-    lineList.print();
-    //int step = 2;
-    lineList.event_A(lineList);
-    lineList.print();
-    lineList.event_B(nameList,lineList);
-    lineList.print();
-    lineList.event_C(lineList);
-    lineList.print();
-    lineList.event_D(lineList);
-    lineList.print();
-    /*for (int i = 0; i < MAX_LS - 1; i++) {
+    int step = 2;
+    for (int i = 0; i < MAX_LS - 1; i++) {
         cout << "Time #step" << step << endl;
         lineList.pick_event(nameList,lineList);
         cout << setw(MIN_NR) << "Resulting line" << endl;
         lineList.print();
         step++;
-    }*/
+    }
     return 0;
 }
