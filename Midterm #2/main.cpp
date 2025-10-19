@@ -279,12 +279,20 @@ public:
         line.pop_front();
     }
     void event_B(DoublyLinkedList &name,DoublyLinkedList &line){
-        
+        string n = name.get_rand_customer();
+        cout << n << " joined the line" << endl;
+        line.push_back(n);
     }
     void event_C(DoublyLinkedList &line){
-        
+        Node *current = line.tail;
+        cout << current->name << " (at the rear) left the line" << endl;
+        line.pop_back();
     }
     void event_D(DoublyLinkedList &line){
+        int length = line.get_size();
+        cout << length << endl;
+        int val = rand() % length;
+        line.delete_pos(val);
         
     }
     void event_E(DoublyLinkedList &name,DoublyLinkedList &line){
@@ -302,8 +310,14 @@ int main() {
         lineList.push_back(nameList.get_rand_customer());
     }
     lineList.print();
-    int step = 2;
+    //int step = 2;
     lineList.event_A(lineList);
+    lineList.print();
+    lineList.event_B(nameList,lineList);
+    lineList.print();
+    lineList.event_C(lineList);
+    lineList.print();
+    lineList.event_D(lineList);
     lineList.print();
     /*for (int i = 0; i < MAX_LS - 1; i++) {
         cout << "Time #step" << step << endl;
