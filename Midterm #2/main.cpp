@@ -194,7 +194,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->name << endl;
+            cout << setw(MIN_NR) << current->name << endl;
             current = current->next;
         }
         cout << endl;
@@ -236,11 +236,10 @@ public:
         inputFile.close();
     }
     
-    void get_rand_customer(){
+    string get_rand_customer(){
         int size = get_size();
         if (size == 0) {
-            cout << "linked list is empty" << endl;
-            return;
+            return "Empty";
         }
         
         int index = rand() % size;
@@ -248,7 +247,7 @@ public:
         for (int i = 0; i < index; i++) {
             current = current->next;
         }
-        
+        return current->name;
     }
     
     void pick_event(){
@@ -276,7 +275,7 @@ public:
         
     }
     void event_A(){
-        string customer = get_rand_customer();
+        
     }
     void event_B(){
         
@@ -296,15 +295,14 @@ int main() {
     srand(time(0));
     DoublyLinkedList nameList;
     nameList.gather_customers("names.txt");
-    cout << nameList.get_size() << endl;
-    nameList.print();
     DoublyLinkedList lineList;
-    /*cout << "Store opens: " << endl;
+    cout << "Store opens: " << endl;
     for (int i = 0;  i < MIN_LS; i++) {
-        
+        lineList.push_back(nameList.get_rand_customer());
     }
+    lineList.print();
     
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning*/
+    
     
     
     return 0;
