@@ -6,6 +6,9 @@
 //
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -208,11 +211,37 @@ public:
         }
         cout << endl;
     }
+    void choose_customers(string file){
+        ifstr
+        
+        if (!head) {
+            
+        }
+    }
+    void pick_event(){
+        
+    }
+    void event_A(){
+        
+    }
+    void event_B(){
+        
+    }
+    void event_C(){
+        
+    }
+    void event_D(){
+        
+    }
+    void event_E(){
+        
+    }
 };
 
 int main() {
+    srand(time(0));
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
-
+    
     
     return 0;
 }
