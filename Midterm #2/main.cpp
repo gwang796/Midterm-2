@@ -212,7 +212,9 @@ public:
         }
         cout << endl;
     }
-    
+    //function get_size finds size of linked list
+    //arguments: none
+    //return: int size
     int get_size(){
         int count = 0;
         Node* current = head;
@@ -222,7 +224,9 @@ public:
         }
         return count;
     }
-    
+    //function gather_customers opens name.txt file and adds it to linked list
+    //arguments: string file
+    //return: none
     void gather_customers(string file){
         ifstream inputFile(file);
         if (!inputFile) {
@@ -235,21 +239,25 @@ public:
         }
         inputFile.close();
     }
-    
-    string get_rand_customer(){
-        int size = get_size();
+    //funtion get_rand_customer chooses a random customer from
+    //arguments: linked list name
+    //return: string name
+    string get_rand_customer(DoublyLinkedList &name){
+        int size = name.get_size();
         if (size == 0) {
             return "Empty";
         }
         
         int index = rand() % size;
-        Node* current = head;
+        Node* current = name.head;
         for (int i = 0; i < index; i++) {
             current = current->next;
         }
         return current->name;
     }
-    //function pick_event
+    //function pick_event chooses from the possible events
+    //arguments: linked list line, linked list name
+    //return : none
     void pick_event(DoublyLinkedList &name,DoublyLinkedList &line ){
         int rand1, rand2, rand3, rand4, rand5;
         rand1 = rand() % 100 +1;
@@ -286,7 +294,7 @@ public:
     //arguments: linked list line, linked list name
     //return: none
     void event_B(DoublyLinkedList &name,DoublyLinkedList &line){
-        string n = name.get_rand_customer();
+        string n = name.get_rand_customer(name);
         cout << n << " joined the line" << endl;
         line.push_back(n);
     }
@@ -320,7 +328,7 @@ public:
     //arguments: linked list line
     //return: none
     void event_E(DoublyLinkedList &name,DoublyLinkedList &line){
-        string n = name.get_rand_customer();
+        string n = name.get_rand_customer(name);
         cout << n << " (VIP) joins the front of line" << endl;
         line.push_front(n);
     }
@@ -335,7 +343,7 @@ int main() {
     string name;
     cout << "Store opens: " << endl;
     for (int i = 0;  i < MIN_LS; i++) {
-        name = nameList.get_rand_customer();
+        name = nameList.get_rand_customer(nameList);
         lineList.push_back(name);
         cout << name << " joins the line" << endl;
     }
@@ -344,6 +352,7 @@ int main() {
     for (int i = 0; i < MAX_LS - 1; i++) {
         if (lineList.get_size()==0) {
             cout << "Line is empty" << endl;
+            return 0;
         }
         cout << "Time step #" << step << endl;
         lineList.pick_event(nameList,lineList);
