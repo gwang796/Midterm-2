@@ -11,7 +11,7 @@
 #include <fstream>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20, start = 5;
 
 class DoublyLinkedList {
 private:
@@ -19,7 +19,7 @@ private:
         string name;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(string val, Node* p = nullptr, Node* n = nullptr) {
             name = val;
             prev = p;
             next = n;
@@ -124,7 +124,7 @@ public:
         delete temp;
     }
 
-    void push_back(int v) {
+    void push_back(string v) {
         Node* newNode = new Node(v);
         if (!tail)
             head = tail = newNode;
@@ -135,7 +135,7 @@ public:
         }
     }
     
-    void push_front(int v) {
+    void push_front(string v) {
         Node* newNode = new Node(v);
         if (!head)
             head = tail = newNode;
@@ -212,11 +212,20 @@ public:
         }
         cout << endl;
     }
-    void choose_customers(string file){
-        
-        
-        if (!head) {
-            
+    
+    void get_size(){
+        int count = 0;
+    }
+    
+    void choose_customer(string file){
+        ifstream inputFile(file);
+        if (!inputFile) {
+            cout << "Error opening file" << endl;
+            return;
+        }
+        string name;
+        while (getline(inputFile,name)) {
+            push_back(name);
         }
     }
     void pick_event(){
@@ -263,6 +272,9 @@ public:
 int main() {
     srand(time(0));
     cout << "Store opens: " << endl;
+    for (int i = 0;  i < start; i++) {
+        <#statements#>
+    }
     
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
     
