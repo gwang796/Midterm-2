@@ -223,7 +223,7 @@ public:
         return count;
     }
     
-    void choose_customer(string file){
+    void gather_customers(string file){
         ifstream inputFile(file);
         if (!inputFile) {
             cout << "Error opening file" << endl;
@@ -233,6 +233,7 @@ public:
         while (getline(inputFile,name)) {
             push_back(name);
         }
+        inputFile.close();
     }
     
     void get_rand_customer(){
@@ -240,6 +241,12 @@ public:
         if (size == 0) {
             cout << "linked list is empty" << endl;
             return;
+        }
+        
+        int index = rand() % size;
+        Node* current = head;
+        for (int i = 0; i < index; i++) {
+            current = current->next;
         }
         
     }
@@ -269,7 +276,7 @@ public:
         
     }
     void event_A(){
-        
+        string customer = get_rand_customer();
     }
     void event_B(){
         
@@ -288,9 +295,10 @@ public:
 int main() {
     srand(time(0));
     DoublyLinkedList nameList;
-    nameList.choose_customer("names.txt");
+    nameList.gather_customers("names.txt");
     cout << nameList.get_size() << endl;
     nameList.print();
+    DoublyLinkedList lineList;
     /*cout << "Store opens: " << endl;
     for (int i = 0;  i < MIN_LS; i++) {
         
