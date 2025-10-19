@@ -250,7 +250,7 @@ public:
         return current->name;
     }
     
-    void pick_event(){
+    void pick_event(DoublyLinkedList &name,DoublyLinkedList &line ){
         int rand1, rand2, rand3, rand4, rand5;
         rand1 = rand() % 100 +1;
         rand2 = rand() % 100 +1;
@@ -258,35 +258,35 @@ public:
         rand4 = rand() % 100 +1;
         rand5 = rand() % 100 +1;
         if (rand1 <= 40) {
-            event_A();
+            event_A(line);
         }
         if (rand2 <= 60) {
-            event_B();
+            event_B(name,line);
         }
         if (rand3 <= 20) {
-            event_C();
+            event_C(line);
         }
         if (rand4 <= 10) {
-            event_D();
+            event_D(line);
         }
         if (rand5 <= 10) {
-            event_E();
+            event_E(name,line);
         }
         
     }
-    void event_A(){
+    void event_A(DoublyLinkedList &line){
+        cout << line.
+    }
+    void event_B(DoublyLinkedList &name,DoublyLinkedList &line){
         
     }
-    void event_B(){
+    void event_C(DoublyLinkedList &line){
         
     }
-    void event_C(){
+    void event_D(DoublyLinkedList &line){
         
     }
-    void event_D(){
-        
-    }
-    void event_E(){
+    void event_E(DoublyLinkedList &name,DoublyLinkedList &line){
         
     }
 };
@@ -301,6 +301,14 @@ int main() {
         lineList.push_back(nameList.get_rand_customer());
     }
     lineList.print();
+    int step = 2;
+    for (int i = 0; i < MAX_LS - 1; i++) {
+        cout << "Time #step" << step << endl;
+        lineList.pick_event(nameList,lineList);
+        cout << setw(MIN_NR) << "Resulting line" << endl;
+        lineList.print();
+        step++;
+    }
     
     
     
