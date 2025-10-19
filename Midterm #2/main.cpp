@@ -11,7 +11,7 @@
 #include <fstream>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20, start = 5;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 class DoublyLinkedList {
 private:
@@ -32,7 +32,7 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void insert_after(int value, int position) {
+    void insert_after(string value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -194,7 +194,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->name << " ";
+            cout << current->name << endl;
             current = current->next;
         }
         cout << endl;
@@ -213,8 +213,14 @@ public:
         cout << endl;
     }
     
-    void get_size(){
+    int get_size(){
         int count = 0;
+        Node* current = head;
+        while (current) {
+            count++;
+            current = current->next;
+        }
+        return count;
     }
     
     void choose_customer(string file){
@@ -228,6 +234,16 @@ public:
             push_back(name);
         }
     }
+    
+    void get_rand_customer(){
+        int size = get_size();
+        if (size == 0) {
+            cout << "linked list is empty" << endl;
+            return;
+        }
+        
+    }
+    
     void pick_event(){
         int rand1, rand2, rand3, rand4, rand5;
         rand1 = rand() % 100 +1;
@@ -271,12 +287,16 @@ public:
 
 int main() {
     srand(time(0));
-    cout << "Store opens: " << endl;
-    for (int i = 0;  i < start; i++) {
-        <#statements#>
+    DoublyLinkedList nameList;
+    nameList.choose_customer("names.txt");
+    cout << nameList.get_size() << endl;
+    nameList.print();
+    /*cout << "Store opens: " << endl;
+    for (int i = 0;  i < MIN_LS; i++) {
+        
     }
     
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning*/
     
     
     return 0;
